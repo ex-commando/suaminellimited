@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Shield, HeartPulse, Recycle, UserCheck } from 'lucide-react';
+import constructionImg from '../assets/images/construction_black_engineers_abuja.png';
+import teamImg from '../assets/images/suaminel_corporate_team_black.png';
 
 const Quality = () => {
   const qualityPoints = [
@@ -18,7 +20,7 @@ const Quality = () => {
 
   return (
     <div className="quality-page">
-      <header className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url(/src/assets/images/construction_black_engineers_abuja.png)', backgroundSize: 'cover' }}>
+      <header className="page-header" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url(${constructionImg})`, backgroundSize: 'cover' }}>
         <div className="container">
           <div style={{ display: 'inline-flex', padding: '1rem', background: 'var(--primary)', color: 'white', borderRadius: '50%', marginBottom: '1.5rem' }}>
             <UserCheck size={40} />
@@ -52,7 +54,7 @@ const Quality = () => {
               </div>
             </div>
             <div>
-              <img src="/src/assets/images/suaminel_corporate_team_black.png" alt="Quality Meeting" style={{ borderRadius: '12px', boxShadow: 'var(--shadow-lg)' }} />
+              <img src={teamImg} alt="Quality Meeting" style={{ borderRadius: '12px', boxShadow: 'var(--shadow-lg)' }} />
             </div>
           </div>
         </div>

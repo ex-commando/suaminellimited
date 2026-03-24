@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Target, Eye, Globe } from 'lucide-react';
+import teamImg from '../assets/images/suaminel_corporate_team_black.png';
+import officeImg from '../assets/images/ict_consultancy_black_specialists.png';
 
 const About = () => {
   const values = [
@@ -13,7 +15,7 @@ const About = () => {
 
   return (
     <div className="about-page">
-      <header className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url(/src/assets/images/suaminel_corporate_team_black.png)', backgroundSize: 'cover', backgroundHeight: '400px' }}>
+      <header className="page-header" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url(${teamImg})`, backgroundSize: 'cover', backgroundHeight: '400px' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <h1>Who We Are</h1>
           <p style={{ fontSize: '1.25rem', opacity: '0.9', maxWidth: '800px', margin: '1rem auto' }}>
@@ -48,7 +50,7 @@ const About = () => {
               </ul>
             </div>
             <div>
-              <img src="/src/assets/images/ict_consultancy_black_specialists.png" alt="Office View" style={{ borderRadius: '12px', boxShadow: 'var(--shadow-lg)' }} />
+              <img src={officeImg} alt="Office View" style={{ borderRadius: '12px', boxShadow: 'var(--shadow-lg)' }} />
             </div>
           </div>
         </div>
