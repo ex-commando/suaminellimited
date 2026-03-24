@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Hammer, Building, Monitor, Leaf, Droplets, Truck, Sun, ArrowRightCircle } from 'lucide-react';
+import { Shield, Hammer, Building, Monitor, Leaf, Droplets, Truck, Sun, ArrowRightCircle, Box } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Image imports
@@ -16,7 +16,7 @@ const Services = () => {
     { 
       id: 1, 
       title: 'Security Services', 
-      icon: <Shield />, 
+      icon: <Shield size={32} />, 
       image: securityImg,
       desc: 'Comprehensive solutions tailored to protect people, assets, and infrastructure. Includes manned guarding, CCTV, and consultancy.',
       link: '/services/security'
@@ -24,35 +24,35 @@ const Services = () => {
     { 
       id: 2, 
       title: 'Civil & Construction', 
-      icon: <Hammer />, 
+      icon: <Hammer size={32} />, 
       image: constructionImg,
       desc: 'Residential and commercial buildings, structural works, and community development through infrastructure projects.' 
     },
     { 
       id: 3, 
       title: 'Solar Energy Solutions', 
-      icon: <Sun />, 
+      icon: <Sun size={32} />, 
       image: solarImg,
       desc: 'Design and deployment of solar-powered systems for homes, businesses, and street lighting.' 
     },
     { 
       id: 4, 
       title: 'Borehole & Water', 
-      icon: <Droplets />, 
+      icon: <Droplets size={32} />, 
       image: boreholeImg,
       desc: 'Industrial and domestic borehole drilling, solar-powered boreholes, and irrigation systems.' 
     },
     { 
       id: 5, 
       title: 'ICT Consultancy', 
-      icon: <Monitor />, 
+      icon: <Monitor size={32} />, 
       image: ictImg,
       desc: 'Technology solutions, cybersecurity audit, and systems integration for modern enterprise development.' 
     },
     { 
       id: 6, 
       title: 'Agricultural Services', 
-      icon: <Leaf />, 
+      icon: <Leaf size={32} />, 
       image: agriImg,
       desc: 'Supporting agricultural development through irrigation system design and project support.' 
     },
@@ -60,39 +60,59 @@ const Services = () => {
 
   return (
     <div className="services-page">
-      <header className="page-header" style={{ background: 'var(--secondary)' }}>
+      <header className="page-header" style={{ position: 'relative', overflow: 'hidden' }}>
+        <Box className="watermark-icon watermark-icon-light" style={{ right: '10%', top: '10%' }} />
         <div className="container">
-          <h1>Our Core Services</h1>
-          <p style={{ maxWidth: '700px', margin: '1rem auto' }}>
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 1 }}
+          >
+            Our Core Services
+          </motion.h1>
+          <motion.p 
+            style={{ maxWidth: '700px', margin: '2rem auto', fontSize: '1.25rem', opacity: '0.8' }}
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 1, delay: 0.3 }}
+          >
             Suaminel Limited offers proactive and customer-focused solutions across 
             diverse industries with commitment to excellence.
-          </p>
+          </motion.p>
         </div>
       </header>
 
       <section className="section-padding">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '3rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', gap: '4rem' }}>
             {allServices.map((s, idx) => (
               <motion.div 
                 key={s.id} 
                 className="service-card-premium"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.1 }}
+                transition={{ duration: 0.8, delay: (idx % 2) * 0.15 }}
                 viewport={{ once: true }}
+                whileHover={{ translateY: -15 }}
               >
-                <div className="service-img-wrapper">
-                  <img src={s.image} alt={s.title} className="service-card-img" />
-                  <div className="service-icon-badge">{s.icon}</div>
+                <div className="service-img-wrapper" style={{ position: 'relative', height: '300px', borderRadius: '24px 24px 0 0', overflow: 'hidden' }}>
+                  <img src={s.image} alt={s.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div className="service-icon-overlay" style={{ position: 'absolute', bottom: '20px', right: '30px', background: 'var(--primary)', color: 'white', padding: '1.2rem', borderRadius: '16px', boxShadow: 'var(--shadow-lg)' }}>
+                    {s.icon}
+                  </div>
+                  <div className="service-img-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent, rgba(0,0,0,0.4))' }}></div>
                 </div>
-                <div className="service-card-content">
-                  <h3 className="service-card-title">{s.title}</h3>
-                  <p className="service-card-desc">{s.desc}</p>
+                <div className="service-card-content" style={{ padding: '3.5rem 3rem 3rem' }}>
+                  <h3 className="service-card-title" style={{ fontSize: '2rem', marginBottom: '1.5rem', color: 'var(--secondary)' }}>{s.title}</h3>
+                  <p className="service-card-desc" style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginBottom: '2.5rem', lineHeight: '1.8' }}>{s.desc}</p>
                   {s.link ? (
-                    <Link to={s.link} className="btn-service-more">Learn More <ArrowRightCircle size={18} /></Link>
+                    <Link to={s.link} className="btn btn-primary" style={{ padding: '1rem 2.5rem', borderRadius: '12px' }}>
+                      Learn More <ArrowRightCircle size={18} style={{ marginLeft: '0.5rem' }} />
+                    </Link>
                   ) : (
-                    <Link to="/contact" className="btn-service-more">Enquire Now <ArrowRightCircle size={18} /></Link>
+                    <Link to="/contact" className="btn btn-outline" style={{ padding: '1rem 2.5rem', borderRadius: '12px' }}>
+                      Enquire Now <ArrowRightCircle size={18} style={{ marginLeft: '0.5rem' }} />
+                    </Link>
                   )}
                 </div>
               </motion.div>
@@ -101,18 +121,29 @@ const Services = () => {
         </div>
       </section>
 
-      <section className="section-padding" style={{ backgroundColor: 'var(--bg-light)' }}>
+      <section className="section-padding" style={{ backgroundColor: 'var(--bg-light)', position: 'relative', overflow: 'hidden' }}>
+        <Truck className="watermark-icon" style={{ left: '0', bottom: '0', opacity: '0.04' }} />
         <div className="container" style={{ textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>General Supplies & Procurement</h2>
-          <p style={{ maxWidth: '800px', margin: '0 auto 3rem', color: 'var(--text-muted)' }}>
+          <span style={{ color: 'var(--primary)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '4px' }}>Expert Logistics</span>
+          <h2 style={{ fontSize: '3.5rem', marginTop: '2rem' }}>General Supplies & Procurement</h2>
+          <p style={{ maxWidth: '800px', margin: '2rem auto 5rem', color: 'var(--text-muted)', fontSize: '1.2rem', lineHeight: '1.8' }}>
             We supply and install high-quality security equipment, office furniture, 
-            telecommunication systems, and educational materials across Nigeria.
+            telecommunication systems, and educational materials.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
-            {['Security Equipment', 'Office Furniture', 'Computers & Accessories', 'Telecomm Systems', 'Educational Materials'].map((item) => (
-              <div key={item} style={{ background: 'white', padding: '1.5rem', borderRadius: '8px', boxShadow: 'var(--shadow-sm)' }}>
-                <h4 style={{ color: 'var(--primary)' }}>{item}</h4>
-              </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2.5rem' }}>
+            {['Security Systems', 'Office Furniture', 'Computers', 'Telecoms', 'Educational Materials'].map((item) => (
+              <motion.div 
+                key={item} 
+                className="supply-item"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div style={{ background: 'white', padding: '3rem 2rem', borderRadius: '24px', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--divider)' }}>
+                  <h4 style={{ color: 'var(--primary)', fontSize: '1.25rem' }}>{item}</h4>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -121,65 +152,13 @@ const Services = () => {
       <style jsx="true">{`
         .service-card-premium {
           background: white;
-          border-radius: 12px;
-          overflow: hidden;
-          box-shadow: var(--shadow-md);
+          border-radius: 32px;
+          box-shadow: var(--shadow-sm);
           transition: var(--transition);
+          border: 1px solid var(--divider);
         }
         .service-card-premium:hover {
-          transform: translateY(-10px);
-          box-shadow: var(--shadow-lg);
-        }
-        .service-img-wrapper {
-          position: relative;
-          height: 240px;
-        }
-        .service-card-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-        .service-icon-badge {
-          position: absolute;
-          bottom: -20px;
-          right: 30px;
-          width: 50px;
-          height: 50px;
-          background: var(--primary);
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 8px;
-          box-shadow: var(--shadow-md);
-        }
-        .service-card-content {
-          padding: 2.5rem 2rem 2rem;
-        }
-        .service-card-title {
-          font-size: 1.5rem;
-          margin-bottom: 1rem;
-          color: var(--secondary);
-        }
-        .service-card-desc {
-          color: var(--text-muted);
-          margin-bottom: 1.5rem;
-          font-size: 0.95rem;
-          line-height: 1.7;
-        }
-        .btn-service-more {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: var(--primary);
-          font-weight: 700;
-          text-transform: uppercase;
-          font-size: 0.8rem;
-          letter-spacing: 1px;
-        }
-        .btn-service-more:hover {
-          color: var(--primary-dark);
-          transform: translateX(5px);
+          border-color: var(--primary);
         }
       `}</style>
     </div>
