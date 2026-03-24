@@ -78,38 +78,43 @@ const Contact = () => {
 
             <div className="contact-form-wrapper" style={{ background: 'white', padding: '4rem', borderRadius: '12px', boxShadow: 'var(--shadow-lg)', border: '1px solid var(--divider)' }}>
               <h3 style={{ fontSize: '1.75rem', marginBottom: '2.5rem' }}>Send Us a Message</h3>
-              <form style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+              <form 
+                action="https://formspree.io/f/suaminel_limited@gmail.com" 
+                method="POST"
+                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}
+              >
                 <div className="form-group">
                   <label className="form-label">Full Name</label>
-                  <input type="text" className="form-input" placeholder="Enter your name" required />
+                  <input type="text" name="name" className="form-input" placeholder="Enter your name" required />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Email Address</label>
-                  <input type="email" className="form-input" placeholder="Enter your email" required />
+                  <input type="email" name="email" className="form-input" placeholder="Enter your email" required />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Phone Number</label>
-                  <input type="tel" className="form-input" placeholder="Enter your phone" required />
+                  <input type="tel" name="phone" className="form-input" placeholder="Enter your phone" required />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Service Required</label>
-                  <select className="form-select" required>
+                  <select name="service" className="form-select" required>
                     <option value="">Select a service</option>
-                    <option value="security">Security Services</option>
-                    <option value="construction">Civil & Construction</option>
-                    <option value="realestate">Real Estate</option>
-                    <option value="ict">ICT Consultancy</option>
-                    <option value="agriculture">Agricultural Services</option>
-                    <option value="borehole">Borehole Drilling</option>
+                    <option value="Security Services">Security Services</option>
+                    <option value="Civil & Construction">Civil & Construction</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="ICT Consultancy">ICT Consultancy</option>
+                    <option value="Agricultural Services">Agricultural Services</option>
+                    <option value="Borehole Drilling">Borehole Drilling</option>
                   </select>
                 </div>
                 <div className="form-group" style={{ gridColumn: '1/3' }}>
                   <label className="form-label">Message</label>
-                  <textarea className="form-textarea" placeholder="Describe your project needs..."></textarea>
+                  <textarea name="message" className="form-textarea" placeholder="Describe your project needs..." required></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary" style={{ gridColumn: '1/3', fontSize: '1rem', padding: '1rem' }}>
                   Send Message <Send size={18} style={{ marginLeft: '0.5rem' }} />
                 </button>
+                <input type="hidden" name="_subject" value="New Contact Inquiry from Suaminel Limited Website" />
               </form>
             </div>
           </div>
